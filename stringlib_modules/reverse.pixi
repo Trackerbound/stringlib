@@ -1,0 +1,18 @@
+fn slib_reverse($string) {
+    /*
+    Returns a reversed string.
+
+    Arguments:
+        $string (str): string to reverse.
+
+    Returns:
+        $new_str (str): reversed string.
+    */
+
+    $new_str = ""
+    $new_str[0] = 0
+    for($pos = strlen($string) - 1; $pos >= 0; $pos - 1) {
+        sprintf($new_str, "%s%c", $new_str, $string[$pos])
+    }
+    ret($new_str)
+}

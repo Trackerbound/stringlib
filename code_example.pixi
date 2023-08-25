@@ -1,0 +1,14 @@
+include "stringlib.pixi"
+
+test_string = "Hello Pixi!"
+
+printf("%s\n", test_string)  // Hello Pixi!
+
+split_string = stringlib.split(test_string, " ")[0]
+printf("%s\n", split_string)  // Hello
+
+sliced_string = stringlib.slice(split_string, 1)
+printf("%s\n", sliced_string) // ello
+
+reversed_string = stringlib.reverse(sliced_string)
+printf("%s\n", reversed_string)  // olle

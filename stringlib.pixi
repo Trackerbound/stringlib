@@ -1,0 +1,12 @@
+include "stringlib_modules/reverse.pixi"
+include "stringlib_modules/slice.pixi"
+include "stringlib_modules/split.pixi"
+
+stringlib = new()
+stringlib.reverse = slib_reverse
+stringlib.slice = slib_slice
+stringlib.split = slib_split
+
+// stringlib v1.0
+// [under development]
+// by Trackerbound

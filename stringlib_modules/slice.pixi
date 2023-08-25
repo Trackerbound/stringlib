@@ -1,0 +1,68 @@
+fn slib_slice($string, $optional_start, $optional_end, $optional_step) {
+    /*
+    Returns a sliced string from $start to $end with specified step.
+
+    Arguments:
+        $string (str): string to slice.
+        [[$optional_start]] (int): start index to slice from.  Defaults to 0 if it's not specified.
+        [[$optional_end]] (int): end index to slice to. Defaults to string length if it's not specified.
+        [[$optional_step]] (int): slicing step. Defaults to 1 if it's not specified.
+
+    Returns:
+        $new_str (str): sliced string.
+    */
+
+    $new_str = ""
+    $new_str[0] = 0
+
+    if $0 > 3 {  // if step is specified
+        $step = $optional_step
+    }
+    if $0 > 2 {  // if end is specified
+        $end = $optional_end
+    }
+    if $0 > 1 {  // if start is specified
+        $start = $optional_start
+    }
+
+    if $0 < 4 {  // if $step isn't specified, make it 1 by default
+        $step = 1
+    }
+
+    if $0 > 2 && $end < 0 {  // slice from the start of the string if $end exists and is negative
+        if -$optional_end <= strlen($string) {  // check if we exceed strlen
+            $end = strlen($string) + $optional_end
+        } else {
+            $end = strlen($string)
+        }
+    }
+
+    if $0 < 3 || $optional_end > strlen($string) {  // if $end isn't specified, make it strlen by default
+        $end = strlen($string)
+        if $0 < 2 || $start > $end {  // if $start isn't specified OR greater than $end (we cant slice a string by negatve amount of letters), make it 0 by default
+            $start = 0
+            if $0 < 1 {  // if there's no string at all, return empty string
+                ret("")
+            }
+        }
+        if $start < 0 {  // invert start if negative
+            if -$start <= strlen($string) {
+                $start = strlen($string) + $start
+            } else {  // we get an empty string if $start is farther than the end of the string
+                ret("")
+            }
+        }
+    }
+
+    if $step > 0 {
+        for($pos = $start; $pos < $end; $pos + $step) {
+            sprintf($new_str, "%s%c", $new_str, $string[$pos])
+        }
+    } else {
+        for($pos = $end - 1; $pos >= $start; $pos + $step) {
+            sprintf($new_str, "%s%c", $new_str, $string[$pos])
+        }
+    }
+
+    ret($new_str)
+}
